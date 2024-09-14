@@ -1,14 +1,27 @@
 import { StyleSheet } from 'react-native';
-import { Home } from './src/screens/Home'
 import { QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import { MainNavigator } from './src/navigators/MainNavigator';
 import { NavigationContainer } from '@react-navigation/native';
+
+
 const queryClient = new QueryClient()
+
+const linking = {
+  prefixes: ['http://localhost:19006', 'https://react-native-pokedex.vercel.app'],
+  config: {
+    screens: {
+      Home: '',
+      Detail: 'detail',
+      Search: 'search',
+    },
+  },
+};
+
 
 export default function App() {
   return (
     <QueryClientProvider  client={queryClient}>
-      <NavigationContainer>
+      <NavigationContainer linking={linking}>
         <MainNavigator />
       </NavigationContainer>
     </QueryClientProvider>
